@@ -68,12 +68,13 @@
 #             };
 
             # Another try:
-            src= {
-              url= self;
-              type= git;
-              submodules=true;
-            };
+#             src= {
+#               url= "../.";
+#               type= git;
+#               submodules=true;
+#             };
 
+            src= ../.;
 
 
             # These are the packages needed to build nanonote
