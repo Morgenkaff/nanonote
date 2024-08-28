@@ -1,21 +1,5 @@
 {
   description = "A flake for Nanonote";
-     inputs = {
-
-   # Needed
-#         nixpkgs = {
-#             url = "github:nixos/nixpkgs/nixos-24.05";
-#         };
-
-        # These two repos are needed to build nanonote
-        # (the git submodule update --init part)
-        singleapplication.url = "github:itay-grudev/SingleApplication";
-        singleapplication.flake = false;
-
-        catch2.url = "github:catchorg/Catch2";
-        catch2.flake = false;
-
-  };
 
   outputs = { self, nixpkgs, singleapplication, catch2 }:
     let
@@ -27,7 +11,13 @@
 
       # List of supported systems:
       supportedSystems = [
-        "x86_64-linux"
+        "x86_64-linux"#             src = fetchgit {
+#                         url = "https://github.com/agateau/nanonote";
+#                         rev = "${version}";
+#                         sha256 = "MsVHu3lAe/aGzFt1xDrsZHzLF1ysjhRUfruypoXEEnU=";
+#                         fetchSubmodules = true;
+#             };
+
         "aarch64-linux"
         "x86_64-darwin"
         "aarch64-darwin"
@@ -60,28 +50,12 @@
 
             # This is a bit silly solution..
             # But it seemed to be the easiest way to fetch the submodules too.
-#             src = fetchgit {
-#                         url = "https://github.com/agateau/nanonote";
-#                         rev = "${version}";
-#                         sha256 = "MsVHu3lAe/aGzFt1xDrsZHzLF1ysjhRUfruypoXEEnU=";
-#                         fetchSubmodules = true;
-#             };
-
             src = fetchgit {
-                        url = "../.";
+                        url = "https://github.com/agateau/nanonote";
                         rev = "${version}";
                         sha256 = "MsVHu3lAe/aGzFt1xDrsZHzLF1ysjhRUfruypoXEEnU=";
                         fetchSubmodules = true;
             };
-
-            # Another try:
-#             src= {
-#               url= "../.";
-#               type= git;
-#               submodules=true;
-#             };
-
-#             src= "../.";
 
 
             # These are the packages needed to build nanonote
