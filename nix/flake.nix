@@ -1,7 +1,7 @@
 {
   description = "A flake for Nanonote";
 
-  outputs = { self, nixpkgs, singleapplication, catch2 }:
+  outputs = { self, nixpkgs }:
     let
 
       # Set a var for the version/release number for nanonote
