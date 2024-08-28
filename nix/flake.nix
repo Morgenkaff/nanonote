@@ -1,7 +1,22 @@
 {
   description = "A flake for Nanonote";
 
-  outputs = { self, nixpkgs }:
+
+   inputs = {
+
+   # Needed
+#         nixpkgs = {
+#             url = "github:nixos/nixpkgs/nixos-24.05";
+#         };
+
+        # This is needed to build nanonote
+        # (the git submodule update --init part)
+        singleapplication.url = "github:itay-grudev/SingleApplication";
+        singleapplication.flake = false;
+
+  };
+
+  outputs = { self, nixpkgs, singleapplication }:
     let
 
       # List of supported systems:
@@ -47,6 +62,7 @@
               libsForQt5.qt5.qtbase
               libsForQt5.qt5.qttools
               libsForQt5.qt5.wrapQtAppsHook
+              git
             ];
 
             # Command to build nanonote (with a core limitation, just to be safe)
