@@ -70,6 +70,8 @@
 
             # Command to build nanonote (with a core limitation, just to be safe)
             buildPhase = ''
+            git submodule update --init
+
               make -j $NIX_BUILD_CORES
             '';
 
