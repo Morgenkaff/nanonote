@@ -81,7 +81,7 @@
 #               submodules=true;
 #             };
 
-            src= "../.";
+#             src= "../.";
 
 
             # These are the packages needed to build nanonote
