@@ -1,17 +1,9 @@
 {
   description = "A flake for Nanonote";
-  
-  inputs = {
-        nixpkgs = {
-            url = "github:nixos/nixpkgs/nixos-23.11";
-        };
-        singleapplication.url = "github:itay-grudev/SingleApplication";
-        singleapplication.flake = false;
 
-  };
-  
-  outputs = inputs@{ self, nixpkgs, singleapplication }:
+  outputs = { self, nixpkgs }:
     let
+
       # List of supported systems:
       supportedSystems = [
         "x86_64-linux"
@@ -27,43 +19,55 @@
 
     in
     {
-        # Provide some binary packages for selected system types.
+      # Create the package output for all system architectures
       packages = forAllSystems (system:
-        let 
-          pkgs = nixpkgsFor.${system}; 
+        let
+          # Set pkg as nixpkgs for correct system architectures
+          pkgs = nixpkgsFor.${system};
         in
         {
-          
+
+          # Declare a default package (there's only one package in this flake..)
           default = self.packages.${system}.nanonote;
-        
+
+          # Write derivation for nanonote.
+          # Declaring the src, name, built dependencies etc
           nanonote = with pkgs; pkgs.stdenv.mkDerivation rec {
+
+            # Set the package name with "version" appended
             name = "nanonote";
-            pname = "nanonote";
+
+            # The source is simply the diorectory above. Easy..
             src = ../.;
+
+            # These are the packages needed to build nanonote
             nativeBuildInputs = [
-                cmake
-                extra-cmake-modules
-                libsForQt5.qt5.qtbase
-                libsForQt5.qt5.qttools
-                libsForQt5.qt5.wrapQtAppsHook
-                git
+              cmake
+              extra-cmake-modules
+              libsForQt5.qt5.qtbase
+              libsForQt5.qt5.qttools
+              libsForQt5.qt5.wrapQtAppsHook
             ];
+
+            # Command to build nanonote (with a core limitation, just to be safe)
             buildPhase = ''
-                make -j $NIX_BUILD_CORES;
+              make -j $NIX_BUILD_CORES
             '';
+
+            # And make install, to get all the pieces tp the wight places.
+            # $out is the nix store/derivation output (don't know what it's called)
             installPhase = ''
-                make install PREFIX=$out
+              make install PREFIX=$out
             '';
           };
         }
       );
-      apps = forAllSystems (system: {
-        default = self.apps.${system}.nanonote;
 
-        nanonote = {
-          type = "app";
-          program = "${self.packages.${system}.nanonote}/bin/nanonote";
-        };
-      });
+      # At last declaring the overlay used in the recieving/consuming flakes
+      overlays.default = final: prev: {
+        nanonote = self.packages.${prev.system}.nanonote;
+      };
+
     };
+
 }
