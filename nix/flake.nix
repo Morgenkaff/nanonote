@@ -67,6 +67,13 @@
 #                         fetchSubmodules = true;
 #             };
 
+            src = fetchgit {
+                        url = "../.";
+                        rev = "${version}";
+                        sha256 = "MsVHu3lAe/aGzFt1xDrsZHzLF1ysjhRUfruypoXEEnU=";
+                        fetchSubmodules = true;
+            };
+
             # Another try:
 #             src= {
 #               url= "../.";
@@ -74,7 +81,7 @@
 #               submodules=true;
 #             };
 
-            src= ../.;
+            src= "../.";
 
 
             # These are the packages needed to build nanonote
