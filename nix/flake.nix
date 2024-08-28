@@ -1,5 +1,21 @@
 {
   description = "A flake for Nanonote";
+     inputs = {
+
+   # Needed
+#         nixpkgs = {
+#             url = "github:nixos/nixpkgs/nixos-24.05";
+#         };
+
+        # These two repos are needed to build nanonote
+        # (the git submodule update --init part)
+        singleapplication.url = "github:itay-grudev/SingleApplication";
+        singleapplication.flake = false;
+
+        catch2.url = "github:catchorg/Catch2";
+        catch2.flake = false;
+
+  };
 
   outputs = { self, nixpkgs, singleapplication, catch2 }:
     let
