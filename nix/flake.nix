@@ -11,10 +11,10 @@
 
         # These two repos are needed to build nanonote
         # (the git submodule update --init part)
-        singleapplication.url = "github:itay-grudev/SingleApplication";
+        singleapplication.url = "github:itay-grudev/SingleApplication?submodules=1";
         singleapplication.flake = false;
 
-        catch2.url = "github:catchorg/Catch2";
+        catch2.url = "github:catchorg/Catch2?submodules=1";
         catch2.flake = false;
 
   };
