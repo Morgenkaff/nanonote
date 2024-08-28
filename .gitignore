@@ -3,3 +3,4 @@
 /artifacts
 CMakeLists.txt.user*
 .*.swp
+flake.lock
