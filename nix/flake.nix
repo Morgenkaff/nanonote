@@ -68,7 +68,11 @@
 #             };
 
             # Another try:
-            src= {url= self; submodules=true;};
+            src= {
+              url= self;
+              type= git;
+              submodules=true;
+            };
 
 
 
