@@ -1,24 +1,6 @@
 {
   description = "A flake for Nanonote";
 
-
-   inputs = {
-
-   # Needed
-#         nixpkgs = {
-#             url = "github:nixos/nixpkgs/nixos-24.05";
-#         };
-
-        # These two repos are needed to build nanonote
-        # (the git submodule update --init part)
-        singleapplication.url = "github:itay-grudev/SingleApplication?submodules=1";
-        singleapplication.flake = false;
-
-        catch2.url = "github:catchorg/Catch2?submodules=1";
-        catch2.flake = false;
-
-  };
-
   outputs = { self, nixpkgs, singleapplication, catch2 }:
     let
 
@@ -60,16 +42,19 @@
             # Set the package name with "version" appended
             name = "nanonote";
 
-            # The source is simply the diorectory above. Easy..
-#             src = "../.?submodules=1";
-
             # This is a bit silly solution..
-            src = fetchgit {
-                        url = "https://github.com/agateau/nanonote";
-                        rev = "${version}";
-                        sha256 = "MsVHu3lAe/aGzFt1xDrsZHzLF1ysjhRUfruypoXEEnU=";
-                        fetchSubmodules = true;
-            };
+            # But it seemed to be the easiest way to fetch the submodules too.
+#             src = fetchgit {
+#                         url = "https://github.com/agateau/nanonote";
+#                         rev = "${version}";
+#                         sha256 = "MsVHu3lAe/aGzFt1xDrsZHzLF1ysjhRUfruypoXEEnU=";
+#                         fetchSubmodules = true;
+#             };
+
+            # Another try:
+            src= {url= self; submodules=true;};
+
+
 
             # These are the packages needed to build nanonote
             nativeBuildInputs = [
