@@ -14,12 +14,12 @@
         singleapplication.url = "github:itay-grudev/SingleApplication";
         singleapplication.flake = false;
 
-        singleapplication.url = "github:catchorg/Catch2";
-        singleapplication.flake = false;
+        catch2.url = "github:catchorg/Catch2";
+        catch2.flake = false;
 
   };
 
-  outputs = { self, nixpkgs, singleapplication }:
+  outputs = { self, nixpkgs, singleapplication, catch2 }:
     let
 
       # List of supported systems:
