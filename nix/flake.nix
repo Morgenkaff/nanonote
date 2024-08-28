@@ -9,9 +9,12 @@
 #             url = "github:nixos/nixpkgs/nixos-24.05";
 #         };
 
-        # This is needed to build nanonote
+        # These two repos are needed to build nanonote
         # (the git submodule update --init part)
         singleapplication.url = "github:itay-grudev/SingleApplication";
+        singleapplication.flake = false;
+
+        singleapplication.url = "github:catchorg/Catch2";
         singleapplication.flake = false;
 
   };
