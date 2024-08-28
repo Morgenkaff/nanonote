@@ -56,7 +56,15 @@
             name = "nanonote";
 
             # The source is simply the diorectory above. Easy..
-            src = ../.;
+#             src = "../.?submodules=1";
+
+            # This is a bit silly solution..
+            src = fetchgit {
+                        url = "https://github.com/agateau/nanonote";
+                        rev = "${version}";
+                        sha256 = "MsVHu3lAe/aGzFt1xDrsZHzLF1ysjhRUfruypoXEEnU=";
+                        fetchSubmodules = true;
+            };
 
             # These are the packages needed to build nanonote
             nativeBuildInputs = [
