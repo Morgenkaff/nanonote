@@ -1,12 +1,13 @@
-{
-description = "An example flake for Nanonote";
 
 # This example flake does probably not work. But it should make it clear how to add Nanonote
 # to your system flake, to be able to install Nanonote on your nix system.
 
+{
+description = "An example flake for Nanonote";
+
   inputs = {
 
-    # General nixos inputs:
+    # General nixpkgs inputs:
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
 
     # Home-mamanger inputs
@@ -18,10 +19,12 @@ description = "An example flake for Nanonote";
 
   };
 
-  outputs = { self, nixpkgs, home-manager, nanonote, ... }@inputs:
+  outputs = { nixpkgs, home-manager, nanonote, ... }@inputs:
 
   let
 
+  # Set the system you are using here.
+  # This can be set in multiple ways, this is just one example.
   system = "x86_64-linux";
 
   in {
