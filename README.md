@@ -16,6 +16,8 @@ Binary packages for Linux, macOS and Windows are available on the [release page]
 
 [release page]: https://github.com/agateau/nanonote/releases
 
+It is also possible to install it as a flake. See the [example](nix/example.nix) in the nix folder.
+
 ## Tips and tricks
 
 Even if Nanonote has a minimalist user interface, it comes with some handy shortcuts. Learn more about them from the [tips and tricks page](docs/tips.md).
