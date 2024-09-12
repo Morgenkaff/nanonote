@@ -11,13 +11,7 @@
 
       # List of supported systems:
       supportedSystems = [
-        "x86_64-linux"#             src = fetchgit {
-#                         url = "https://github.com/agateau/nanonote";
-#                         rev = "${version}";
-#                         sha256 = "MsVHu3lAe/aGzFt1xDrsZHzLF1ysjhRUfruypoXEEnU=";
-#                         fetchSubmodules = true;
-#             };
-
+        "x86_64-linux"
         "aarch64-linux"
         "x86_64-darwin"
         "aarch64-darwin"
@@ -56,7 +50,6 @@
                         sha256 = "MsVHu3lAe/aGzFt1xDrsZHzLF1ysjhRUfruypoXEEnU=";
                         fetchSubmodules = true;
             };
-
 
             # These are the packages needed to build nanonote
             nativeBuildInputs = [
